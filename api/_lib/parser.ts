@@ -4,8 +4,8 @@ import { ParsedRequest } from './types';
 
 export function parseRequest(req: IncomingMessage) {
     console.log('HTTP ' + req.url);
-    const url = req.url?.replace(/&amp;/g, '&') || ''
-    const { pathname = '/', query = {} } = parse(decodeURIComponent(url), true);
+    const url = req.url ? decodeURIComponent(req.url).replace(/&amp;/g, '&') : ''
+    const { pathname = '/', query = {} } = parse(url, true);
     const { fontSize, images, widths, heights, theme, md } = query;
 
     if (Array.isArray(fontSize)) {
