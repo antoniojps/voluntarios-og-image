@@ -130,7 +130,20 @@ function getCss(theme: string, fontSize: string) {
         font-style: normal;
         color: ${foreground};
         line-height: 1.8;
-    }`;
+    }
+
+    .label {
+        padding: 20px;
+        border-radius: 50px;
+        font-family: 'Inter', sans-serif;
+        display: inline-flex;
+        font-size: 30px;
+        border: 4px solid #000000;
+        margin-bottom: 30px;
+        opacity: 0.5;
+    }
+
+    `;
 }
 
 export function getHtml(parsedReq: ParsedRequest) {
@@ -146,7 +159,7 @@ export function getHtml(parsedReq: ParsedRequest) {
     <body>
         <div class="background"></div>
         <div class="main">
-            <div class="spacer">
+            <div class="label">#fightcovid19</div>
             <div class="heading">${emojify(
                 md ? marked(text) : sanitizeHtml(text)
             )}
