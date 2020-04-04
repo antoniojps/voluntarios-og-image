@@ -30,9 +30,9 @@ export function parseRequest(req: IncomingMessage) {
     const parsedRequest: ParsedRequest = {
         fileType: extension === 'jpeg' ? extension : 'png',
         text: decodeURIComponent(text),
-        theme: theme === 'dark' ? 'dark' : 'light',
-        md: md === '1' || md === 'true',
-        fontSize: fontSize || '96px',
+        theme: 'light',
+        md: (md === '0' || md === 'false') ? false : true,
+        fontSize: fontSize || '80px',
         images: getArray(images),
         widths: getArray(widths),
         heights: getArray(heights),
