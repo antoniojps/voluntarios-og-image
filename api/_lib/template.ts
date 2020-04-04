@@ -14,12 +14,10 @@ const mono = readFileSync(`${__dirname}/../_fonts/Vera-Mono.woff2`).toString('ba
 function getCss(theme: string, fontSize: string) {
     let background = 'white';
     let foreground = 'black';
-    let radial = 'lightgray';
 
     if (theme === 'dark') {
         background = 'black';
         foreground = 'white';
-        radial = 'dimgray';
     }
     return `
     @font-face {
@@ -45,13 +43,27 @@ function getCss(theme: string, fontSize: string) {
 
     body {
         background: ${background};
-        background-image: radial-gradient(circle at 25px 25px, ${radial} 2%, transparent 0%), radial-gradient(circle at 75px 75px, ${radial} 2%, transparent 0%);
-        background-size: 100px 100px;
         height: 100vh;
         display: flex;
         text-align: center;
         align-items: center;
         justify-content: center;
+        position: relative,
+    }
+
+    .background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-image: url("https://voluntarios.app/bg-confetti.svg");
+        background-size: 100%;
+        opacity: 0.5;
+        width: 100%;
+        height: 100%;
+    }
+
+    .main {
+        z-index: 9999;
     }
 
     code {
@@ -73,6 +85,24 @@ function getCss(theme: string, fontSize: string) {
         justify-items: center;
     }
 
+    .logo-start {
+    }
+
+    .logo-info {
+        display: flex;
+        flex-direction: column;
+        font-family: 'Inter', sans-serif;
+        font-size: 60px;
+        font-style: normal;
+        color: ${foreground};
+        line-height: 1.8;
+        text-align: left;
+    }
+
+    .logo-info__bottom {
+        font-weight: bold;
+    }
+
     .logo {
         margin: 0 75px;
     }
@@ -84,7 +114,7 @@ function getCss(theme: string, fontSize: string) {
     }
 
     .spacer {
-        margin: 150px;
+        margin: 100px;
     }
 
     .emoji {
@@ -93,7 +123,7 @@ function getCss(theme: string, fontSize: string) {
         margin: 0 .05em 0 .1em;
         vertical-align: -0.1em;
     }
-    
+
     .heading {
         font-family: 'Inter', sans-serif;
         font-size: ${sanitizeHtml(fontSize)};
@@ -114,17 +144,24 @@ export function getHtml(parsedReq: ParsedRequest) {
         ${getCss(theme, fontSize)}
     </style>
     <body>
-        <div>
-            <div class="spacer">
-            <div class="logo-wrapper">
-                ${images.map((img, i) =>
-                    getPlusSign(i) + getImage(img, widths[i], heights[i])
-                ).join('')}
-            </div>
+        <div class="background"></div>
+        <div class="main">
             <div class="spacer">
             <div class="heading">${emojify(
                 md ? marked(text) : sanitizeHtml(text)
             )}
+            </div>
+            <div class="spacer">
+            <div class="logo-wrapper">
+                <div class="logo-start">
+                ${images.map((img, i) =>
+                    getPlusSign(i) + getImage(img, widths[i], heights[i])
+                ).join('')}
+                </div>
+                <div class="logo-info">
+                    <div class="logo-info__top">Junta-te em</div>
+                    <div class="logo-info__bottom">voluntarios.app</div>
+                </div>
             </div>
         </div>
     </body>

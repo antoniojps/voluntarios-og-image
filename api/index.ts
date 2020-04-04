@@ -5,7 +5,7 @@ import { getHtml } from './_lib/template';
 import { writeTempFile, pathToFileURL } from './_lib/file';
 
 const isDev = process.env.NOW_REGION === 'dev1';
-const isHtmlDebug = process.env.OG_HTML_DEBUG === '1';
+const isHtmlDebug = true // process.env.OG_HTML_DEBUG === '1';
 
 export default async function handler(req: IncomingMessage, res: ServerResponse) {
     try {

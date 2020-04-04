@@ -6,3 +6,4 @@ public/dist
 .DS_Store
 .env
 .env.build
+.now
