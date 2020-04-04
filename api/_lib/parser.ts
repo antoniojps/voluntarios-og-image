@@ -52,5 +52,5 @@ function getDefaultImages(images: string[]): string[] {
     ) {
       return images
     }
-    return ['https://major.shootsgud.com/sml_wide_blbg.png']
+    return ['https://voluntarios.app/voluntarios-dark.svg']
 }
